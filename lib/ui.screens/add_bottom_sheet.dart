@@ -127,6 +127,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
             "checked":false
           }
       ).timeout(Duration(microseconds: 500),onTimeout: (){
+        print("refreshAdd");
         provider.refreshTodos();
         Navigator.pop(context);
       });

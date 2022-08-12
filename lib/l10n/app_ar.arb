@@ -1,3 +1,9 @@
 {
-    "helloWorld": "اهلا"
+    "light":"مضيئ",
+    "dark":"مظلم",
+    "language":"اللغة",
+    "theme":"المظهر",
+    "settings":"الاعدادات",
+    "done":"تم",
+    "todolist":"قائمة المهام"
 }

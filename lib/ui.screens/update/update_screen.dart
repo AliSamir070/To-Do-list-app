@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/shared/components/components.dart';
 import 'package:todo_list_app/ui.screens/add_bottom_sheet.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class UpdateScreen extends StatelessWidget {
   static String route = "update_screen";
   @override
@@ -16,11 +16,11 @@ class UpdateScreen extends StatelessWidget {
               Stack(
                 children: [
                   AppBar(
-                    title: Text('Todo List'),
+                    title: Text(AppLocalizations.of(context)!.todolist),
                     flexibleSpace: SizedBox(
                       height: height*.2,
                     ),
-
+                    titleSpacing: width*0.1,
                   ),
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: width*0.06),

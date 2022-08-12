@@ -8,14 +8,20 @@ import 'package:todo_list_app/utills/AppStyle.dart';
 import '../../model/todo.dart';
 import 'package:intl/intl.dart';
 
+import '../../providers/local_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../providers/todos_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class TodoItem extends StatelessWidget {
   Todo todo;
   late TodosProvider provider;
   TodoItem(this.todo);
-
+  late LocalProvider localProvider;
+  late ThemeProvider themeProvider;
   @override
   Widget build(BuildContext context) {
+    localProvider = Provider.of(context);
+    themeProvider = Provider.of(context);
     double height = MediaQuery.of(context).size.height;
     provider = Provider.of(context);
     return Slidable(
@@ -76,6 +82,7 @@ class TodoItem extends StatelessWidget {
                         Icon(
                           Icons.access_time_outlined,
                           size: 16,
+                          color: themeProvider.mode==ThemeMode.light?Colors.black:Colors.white,
                         ),
                         SizedBox(
                           width: 10,
@@ -93,7 +100,7 @@ class TodoItem extends StatelessWidget {
                 width: 10,
               ),
               todo.checked?Text(
-                'Done!',
+                AppLocalizations.of(context)!.done,
                 style: Theme.of(context).textTheme.headlineLarge,
               ):ElevatedButton(
                   onPressed: (){
