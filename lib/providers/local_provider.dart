@@ -3,16 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalProvider extends ChangeNotifier{
   String locale = "en";
-  LocalProvider(){
+  SharedPreferences preferences;
+  LocalProvider(this.preferences){
     print("locale mode ref");
     getLocaleFromPrefs();
   }
   void getLocaleFromPrefs(){
-    SharedPreferences.getInstance().then((value){
-      locale = value.getString('locale')??"en";
-      print("notify locale");
-      notifyListeners();
-    });
+    locale = preferences.getString('locale')??"en";
+    print("notify locale");
+    notifyListeners();
   }
   void UpdateLocaleToPrefs(String newLocale){
     SharedPreferences.getInstance().then((value){

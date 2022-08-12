@@ -3,22 +3,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier{
   ThemeMode mode = ThemeMode.light;
-  ThemeProvider(){
+  SharedPreferences preferences;
+  ThemeProvider(this.preferences){
     print("theme mode ref");
     getThemeFromPrefs();
   }
   void getThemeFromPrefs(){
-    SharedPreferences.getInstance().then((value){
-      bool isDark = value.getBool('mode')??false;
-      if(isDark){
-        mode = ThemeMode.dark;
-        print("notify mode");
-      }else{
-        mode = ThemeMode.light;
-        print("notify mode");
-      }
-      notifyListeners();
-    });
+    bool isDark = preferences.getBool('mode')??false;
+    if(isDark){
+      mode = ThemeMode.dark;
+      print("notify mode");
+    }else{
+      mode = ThemeMode.light;
+      print("notify mode");
+    }
+    notifyListeners();
   }
   void UpdateThemeToPrefs(bool isDark){
     SharedPreferences.getInstance().then((value){

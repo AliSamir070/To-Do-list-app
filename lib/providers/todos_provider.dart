@@ -27,7 +27,6 @@ class TodosProvider extends ChangeNotifier{
           checked: doc["checked"]
       );
     }).toList();
-    print("refresh");
     todos = todos.where((todo){
       if(todo.dateTime.day==selectedDate.day && todo.dateTime.month==selectedDate.month && todo.dateTime.year==selectedDate.year){
         return true;
