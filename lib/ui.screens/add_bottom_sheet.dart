@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/providers/todos_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddBottomSheet extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Add New Task',
+                  AppLocalizations.of(context)!.newtask,
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -41,14 +42,14 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                   style: Theme.of(context).textTheme.headlineMedium,
                   validator: (text){
                     if(text==null || text.isEmpty){
-                      return "Title shouldn't be empty";
+                      return AppLocalizations.of(context)!.titleerror;
                     }
                   },
                   onChanged: (value){
                     title = value;
                   },
                   decoration: InputDecoration(
-                    hintText: "Please enter todo title",
+                    hintText: AppLocalizations.of(context)!.newtitle,
                     hintStyle: Theme.of(context).textTheme.bodySmall
                   ),
                 ),
@@ -57,7 +58,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                   style: Theme.of(context).textTheme.headlineMedium,
                   validator: (text){
                     if(text==null || text.isEmpty){
-                      return "Description shouldn't be empty";
+                      return AppLocalizations.of(context)!.descerror;
                     }
                   },
                   maxLines: 3,
@@ -65,13 +66,13 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                     description = value;
                   },
                   decoration: InputDecoration(
-                      hintText: "Please enter todo description",
+                      hintText: AppLocalizations.of(context)!.newdesc,
                       hintStyle: Theme.of(context).textTheme.bodySmall
                   ),
                 ),
                 SizedBox(height: 20,),
                 Text(
-                  'Select Time',
+                  AppLocalizations.of(context)!.newtime,
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.start,
                 ),
@@ -92,7 +93,7 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                       addTodo();
                     },
                     child: Text(
-                      'Add',
+                      AppLocalizations.of(context)!.add,
                       style: Theme.of(context).textTheme.bodyMedium,
                     )
                 )

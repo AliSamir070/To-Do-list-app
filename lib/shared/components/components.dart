@@ -156,7 +156,7 @@ class _UpdateCardState extends State<UpdateCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Edit Task',
+              AppLocalizations.of(context)!.edit,
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
@@ -168,12 +168,12 @@ class _UpdateCardState extends State<UpdateCard> {
 
               validator: (text){
                 if(text==null || text.isEmpty){
-                  return "Title shouldn't be empty";
+                  return AppLocalizations.of(context)!.titleerror;
                 }
               },
               style: Theme.of(context).textTheme.headlineMedium,
               decoration: InputDecoration(
-                  hintText: "Please enter todo title",
+                  hintText: AppLocalizations.of(context)!.newtitle,
                   hintStyle: Theme.of(context).textTheme.bodySmall,
 
               ),
@@ -190,19 +190,19 @@ class _UpdateCardState extends State<UpdateCard> {
               style: Theme.of(context).textTheme.headlineMedium,
               validator: (text){
                 if(text==null || text.isEmpty){
-                  return "Description shouldn't be empty";
+                  return AppLocalizations.of(context)!.descerror;
                 }
               },
               maxLines: 3,
 
               decoration: InputDecoration(
-                  hintText: "Please enter todo description",
+                  hintText: AppLocalizations.of(context)!.newdesc,
                   hintStyle: Theme.of(context).textTheme.bodySmall
               ),
             ),
             SizedBox(height: 20,),
             Text(
-              'Select Time',
+              AppLocalizations.of(context)!.newtime,
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.start,
             ),
@@ -232,7 +232,7 @@ class _UpdateCardState extends State<UpdateCard> {
                     ).timeout(Duration(milliseconds: 500),onTimeout: (){
                       provider.refreshTodos();
                       Fluttertoast.showToast(
-                          msg: "Todo Updated Successfully",
+                          msg: AppLocalizations.of(context)!.editmessage,
                           toastLength: Toast.LENGTH_SHORT,
                           backgroundColor: Theme.of(context).primaryColor,
                           textColor: Theme.of(context).secondaryHeaderColor,
@@ -243,7 +243,7 @@ class _UpdateCardState extends State<UpdateCard> {
                   }
                 },
                 child: Text(
-                  'Save changes',
+                  AppLocalizations.of(context)!.save,
                   style: Theme.of(context).textTheme.bodyMedium,
                 )
             ),
