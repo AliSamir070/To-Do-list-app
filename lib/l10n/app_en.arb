@@ -5,5 +5,15 @@
     "theme":"Theme",
     "settings":"Settings",
     "done":"Done",
-    "todolist":"To Do List"
+    "todolist":"To Do List",
+    "newtask":"Add New Task",
+    "newtitle":"Please enter to do title",
+    "newdesc":"Please enter to do description",
+    "newtime":"Select Time",
+    "add":"Add",
+    "save":"Save Changes",
+    "edit":"Edit Task",
+    "titleerror":"Title shouldn't be empty",
+    "descerror":"Description shouldn't be empty",
+    "editmessage":"To Do Updated Successfully"
 }

@@ -18,13 +18,15 @@ void main() async{
   await FirebaseFirestore.instance.disableNetwork();
 
   runApp(ChangeNotifierProvider(
-    create: (BuildContext context)=>ThemeProvider(),
+    create: (BuildContext context)=>TodosProvider(),
     child: ChangeNotifierProvider(
       create: (BuildContext context)=>LocalProvider(),
-      child: ChangeNotifierProvider(create: (BuildContext context)=>TodosProvider(),
-      child: const MyApp()),
+      child: ChangeNotifierProvider(
+          create: (BuildContext context)=>ThemeProvider(),
+          child: const MyApp()),
     ),
-  ));
+  )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("build");
     ThemeProvider themeProvider = Provider.of(context);
     LocalProvider localProvider = Provider.of(context);
     return MaterialApp(
