@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_list_app/providers/local_provider.dart';
 import 'package:todo_list_app/providers/theme_provider.dart';
 import 'package:todo_list_app/providers/todos_provider.dart';
@@ -16,13 +17,13 @@ void main() async{
   FirebaseFirestore.instance.settings =
       Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   await FirebaseFirestore.instance.disableNetwork();
-
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
   runApp(ChangeNotifierProvider(
     create: (BuildContext context)=>TodosProvider(),
     child: ChangeNotifierProvider(
-      create: (BuildContext context)=>LocalProvider(),
+      create: (BuildContext context)=>LocalProvider(preferences),
       child: ChangeNotifierProvider(
-          create: (BuildContext context)=>ThemeProvider(),
+          create: (BuildContext context)=>ThemeProvider(preferences),
           child: const MyApp()),
     ),
   )
