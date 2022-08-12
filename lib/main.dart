@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list_app/providers/local_provider.dart';
+import 'package:todo_list_app/providers/theme_provider.dart';
 import 'package:todo_list_app/providers/todos_provider.dart';
 import 'package:todo_list_app/ui.screens/home.dart';
 import 'package:todo_list_app/ui.screens/update/update_screen.dart';
@@ -15,16 +17,23 @@ void main() async{
       Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   await FirebaseFirestore.instance.disableNetwork();
 
-  runApp(ChangeNotifierProvider(create: (BuildContext context)=>TodosProvider(),
-  child: const MyApp()));
+  runApp(ChangeNotifierProvider(
+    create: (BuildContext context)=>ThemeProvider(),
+    child: ChangeNotifierProvider(
+      create: (BuildContext context)=>LocalProvider(),
+      child: ChangeNotifierProvider(create: (BuildContext context)=>TodosProvider(),
+      child: const MyApp()),
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of(context);
+    LocalProvider localProvider = Provider.of(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
@@ -43,6 +52,10 @@ class MyApp extends StatelessWidget {
       ],
       initialRoute: Home.route,
       theme: AppStyle.lightTheme,
+      darkTheme: AppStyle.darkTheme,
+      themeMode: themeProvider.mode,
+      locale: Locale(localProvider.locale),
+
     );
   }
 }

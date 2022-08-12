@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/shared/components/components.dart';
 import 'package:todo_list_app/providers/todos_provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../model/todo.dart';
+import '../../providers/local_provider.dart';
+import '../../providers/theme_provider.dart';
 
 class ListTab extends StatefulWidget {
 
@@ -16,13 +18,16 @@ class ListTab extends StatefulWidget {
 
 class _ListTabState extends State<ListTab> {
   late TodosProvider provider;
+  late LocalProvider localProvider;
+  late ThemeProvider themeProvider;
   @override
   Widget build(BuildContext context) {
     provider = Provider.of(context);
+    localProvider = Provider.of(context);
+    themeProvider = Provider.of(context);
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    if(provider.todos.isEmpty){
-      provider.refreshTodos();
-    }
+
     return Container(
       width: double.infinity,
       child: Column(
@@ -34,10 +39,11 @@ class _ListTabState extends State<ListTab> {
               Container(
                 margin: EdgeInsetsDirectional.only(bottom: height*0.03),
                 child: AppBar(
-                  title: Text('Todo List'),
+                  title: Text(AppLocalizations.of(context)!.todolist),
                   flexibleSpace: SizedBox(
                     height: height*.2,
                   ),
+                    titleSpacing: width*0.1
                 ),
               ),
               CalendarTimeline(
@@ -46,12 +52,12 @@ class _ListTabState extends State<ListTab> {
                 lastDate: DateTime.now().add(Duration(days: 365)),
                 onDateSelected: (time){
                   provider.setNewSelected(time);
+                  print("selected");
                 },
-                leftMargin: 100.0,
                 showYears: false,
-                dayColor: Colors.black,
-                dayNameColor: Colors.black,
-                monthColor: Theme.of(context).secondaryHeaderColor,
+                dayColor: themeProvider.mode==ThemeMode.light?Colors.black:Colors.white,
+                dayNameColor: themeProvider.mode==ThemeMode.light?Colors.black:Colors.white,
+                monthColor: themeProvider.mode==ThemeMode.light?Colors.black:Colors.white,
                 dotsColor: Theme.of(context).secondaryHeaderColor,
                 activeDayColor: Theme.of(context).primaryColor,
                 activeBackgroundDayColor: Theme.of(context).secondaryHeaderColor,

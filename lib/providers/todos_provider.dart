@@ -6,14 +6,19 @@ import '../model/todo.dart';
 class TodosProvider extends ChangeNotifier{
   List<Todo> todos = [];
   DateTime selectedDate = DateTime.now();
+  TodosProvider(){
+    refreshTodos();
+  }
   void setNewSelected(DateTime newDate){
     selectedDate = newDate;
     refreshTodos();
   }
   void refreshTodos() async{
     QuerySnapshot querySnapshot = await Todo.getCollectionRef().get();
+    print(querySnapshot.size);
     todos = querySnapshot.docs.map((document){
       Map doc = document.data() as Map;
+
       return Todo(
           id: document.id,
           title: doc["title"],
