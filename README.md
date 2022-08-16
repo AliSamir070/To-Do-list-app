@@ -1,4 +1,4 @@
-# To Do list_app
+# To Do list app
 
 A new Flutter project.
 
